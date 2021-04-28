@@ -8,15 +8,20 @@ function App() {
   const [numfor, setNumfor] = useState(9);
   const [sizeimg, setSizeimg] = useState(100);
   const [state, setState] = useState(false);
+  const [audio, setAudio] = useState(true);
 
   const handleChange = () => {
     state === false ? Hard() : easy();
   };
 
+  const mute = () => {
+    audio === true ? setAudio(false) : setAudio(true);
+  };
+
   const Hard = () => {
     setState(true);
     setNumfor(16);
-    setSizeimg(70);
+    setSizeimg(60);
   };
 
   const easy = () => {
@@ -93,12 +98,12 @@ function App() {
 
   const success = () => {
     setpoint(point + 10);
-    audioSuccess.play();
+    audio && audioSuccess.play();
   };
 
   const error = () => {
     setpoint(point - 10);
-    audioError.play();
+    audio && audioError.play();
   };
 
   const testBox1 = (numClick) => {
@@ -151,6 +156,18 @@ function App() {
               />
             }
             label="קשה"
+          />
+          <br />
+          <br />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={state.checkedB}
+                onChange={mute}
+                color="primary"
+              />
+            }
+            label="השתק"
           />
         </div>
         {point}

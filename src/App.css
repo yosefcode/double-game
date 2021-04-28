@@ -5,43 +5,52 @@
 .box1 {
   text-align: center;
   position: absolute;
-  top: 20%;
-  left: calc(20% + 500px);
-  width: 500px;
-  height: 500px;
-  background-color: rgb(247, 250, 217);
+  top: 15%;
+  left: 42%;
+  width: 30%;
+  /* height: 500px; */
   border-radius: 80px;
+  background-image: url("old_map.png");
+  border: rgb(139, 0, 0) 12px double;
+  -webkit-box-shadow: 0 0 50px #fff;
+  box-shadow: 0 0 30px rgb(255, 255, 255);
 }
 .box2 {
   text-align: center;
   position: absolute;
-  top: 20%;
-  left: 10%;
-  width: 500px;
-  height: 500px;
-  background-color: rgb(247, 250, 217);
+  top: 15%;
+  left: 5%;
+  width: 30%;
+  /* height: 500px; */
+  background-image: url("old_map.png");
   border-radius: 80px;
+  border: rgb(139, 0, 0) 12px double;
+  -webkit-box-shadow: 0 0 50px #fff;
+  box-shadow: 0 0 30px rgb(255, 255, 255);
+  /* box-shadow: 5px 5px 8px red, 10px 10px 8px rgb(238, 252, 45); */
 }
 .point {
   text-align: center;
-  position: absolute;
-  top: 5%;
-  left: 32%;
-  width: 25%;
-  height: 60px;
-  background-color: rgb(247, 250, 217);
-  border-radius: 80px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  padding-top: 30px;
+  background-image: url("old_map.png");
   align-content: center;
   font-size: 40px;
   font-weight: 700;
   color: rgb(2, 0, 97);
+  -webkit-box-shadow: 0 0 50px #fff;
+  box-shadow: 0 0 50px rgb(255, 255, 255);
 }
 .switch {
   text-align: center;
   position: absolute;
   top: 20%;
-  left: 11%;
-  width: 30%;
+  /* left: 11%; */
+  width: 80%;
   font-size: 14px;
   font-weight: 500;
   color: rgb(2, 0, 97);
