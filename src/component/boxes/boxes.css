@@ -1,0 +1,49 @@
+.boxes .boxsmall {
+  text-align: center;
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+  top: 15%;
+  left: 42%;
+  width: 30%;
+  border-radius: 50px;
+  background-image: url("old_map.png");
+  border: rgb(139, 0, 0) 12px double;
+  -webkit-box-shadow: 0 0 50px #fff;
+  box-shadow: 0 0 30px rgb(255, 255, 255);
+}
+
+.boxes .boxlarge {
+  text-align: center;
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+  top: 15%;
+  left: 42%;
+  width: 30%;
+  border-radius: 50px;
+  background-image: url("old_map.png");
+  border: rgb(139, 0, 0) 12px double;
+  -webkit-box-shadow: 0 0 50px #fff;
+  box-shadow: 0 0 30px rgb(255, 255, 255);
+}
+
+.boxes #box1 {
+  left: 42%;
+}
+.boxes #box2 {
+  left: 5%;
+}
+
+.boxes .boxsmall .imgbox {
+  display: inline-block;
+  width: 7vw;
+  height: 7vw;
+  margin: 15%;
+}
+.boxes .boxlarge .imgbox {
+  display: inline-block;
+  width: 5vw;
+  height: 5vw;
+  margin: 15%;
+}
