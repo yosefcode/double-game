@@ -1,10 +1,14 @@
 import "./boxes.css";
 
 function Boxes(props) {
-  const { numfor, audio, small_large, point, setpoint } = props;
-
-  let audioSuccess = new Audio("sound/success.mp3");
-  let audioError = new Audio("sound/error.mp3");
+  const {
+    numfor,
+    audioSuccess,
+    audioError,
+    small_large,
+    point,
+    setpoint,
+  } = props;
 
   const imageNames = [
     "1.png",
@@ -71,12 +75,12 @@ function Boxes(props) {
 
   const success = () => {
     setpoint(point + 10);
-    audio && audioSuccess.play();
+    audioSuccess.play();
   };
 
   const error = () => {
     setpoint(point - 10);
-    audio && audioError.play();
+    audioError.play();
   };
 
   const testBox1 = (numClick) => {
@@ -115,6 +119,7 @@ function Boxes(props) {
 
   return (
     <div className="boxes">
+      DOUBLE
       <div className={small_large} id="box1">
         {" "}
         {listBox1.map((numClick, index) => (

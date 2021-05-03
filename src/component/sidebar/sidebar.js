@@ -5,16 +5,13 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import NotificationsOffIcon from "@material-ui/icons/NotificationsOff";
 
 function SideBar(props) {
-  const { setSmall_large, audio, setAudio, setNumfor, point } = props;
+  const { setSmall_large, audioSuccess, audioError, setNumfor, point } = props;
 
   const [state, setState] = useState(false);
+  const [audio, setAudio] = useState(true);
 
   const handleChange = () => {
     state === false ? Hard() : easy();
-  };
-
-  const mute = () => {
-    audio === true ? setAudio(false) : setAudio(true);
   };
 
   const Hard = () => {
@@ -50,6 +47,8 @@ function SideBar(props) {
             fontSize="large"
             className="iconbip"
             onClick={() => {
+              audioError.volume = 0;
+              audioSuccess.volume = 0;
               setAudio(false);
             }}
           />
@@ -58,6 +57,8 @@ function SideBar(props) {
             fontSize="large"
             className="iconbip"
             onClick={() => {
+              audioError.volume = 1;
+              audioSuccess.volume = 1;
               setAudio(true);
             }}
           />

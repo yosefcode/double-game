@@ -7,22 +7,24 @@ function App() {
   const [point, setpoint] = useState(0);
   const [numfor, setNumfor] = useState(9);
   const [small_large, setSmall_large] = useState("boxsmall");
-  const [audio, setAudio] = useState(true);
+  const [audioSuccess] = useState(new Audio("sound/success.mp3"));
+  const [audioError] = useState(new Audio("sound/error.mp3"));
 
   return (
     <div className="App">
       <SideBar
         setSmall_large={setSmall_large}
-        audio={audio}
-        setAudio={setAudio}
         setNumfor={setNumfor}
         point={point}
+        audioError={audioError}
+        audioSuccess={audioSuccess}
       />
 
       <Boxes
         numfor={numfor}
         small_large={small_large}
-        audio={audio}
+        audioError={audioError}
+        audioSuccess={audioSuccess}
         setpoint={setpoint}
         point={point}
       />
