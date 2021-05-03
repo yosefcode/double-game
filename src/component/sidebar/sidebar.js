@@ -5,7 +5,14 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import NotificationsOffIcon from "@material-ui/icons/NotificationsOff";
 
 function SideBar(props) {
-  const { setSmall_large, audioSuccess, audioError, setNumfor, point } = props;
+  const {
+    setSmall_large,
+    audioSuccess,
+    audioError,
+    setNumfor,
+    point,
+    setpoint,
+  } = props;
 
   const [state, setState] = useState(false);
   const [audio, setAudio] = useState(true);
@@ -18,12 +25,14 @@ function SideBar(props) {
     setState(true);
     setNumfor(16);
     setSmall_large("boxlarge");
+    setpoint(0);
   };
 
   const easy = () => {
     setState(false);
     setNumfor(9);
     setSmall_large("boxsmall");
+    setpoint(0);
   };
 
   return (

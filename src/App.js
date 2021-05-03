@@ -18,6 +18,7 @@ function App() {
         point={point}
         audioError={audioError}
         audioSuccess={audioSuccess}
+        setpoint={setpoint}
       />
 
       <Boxes
