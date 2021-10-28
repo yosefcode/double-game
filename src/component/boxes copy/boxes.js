@@ -1,7 +1,6 @@
 import "./boxes.css";
-import React, { useState, useEffect } from "react";
-import GifSuccess from "./Line Stickers & Themes.gif";
-import GifError from "./thumbs-down-emoji-unscreen.gif";
+import React, { useState, useEffect, useRef } from "react";
+
 function Boxes(props) {
   const {
     numfor,
@@ -12,12 +11,6 @@ function Boxes(props) {
     setpoint,
     timer,
     setTimer,
-    hardTimer,
-    setHardTimer,
-    success_Point,
-    setSuccess_Point,
-    error_Point,
-    setError_Point,
   } = props;
 
   const imageNames = [
@@ -83,61 +76,22 @@ function Boxes(props) {
     "60.png",
   ];
 
-  const [listBox1, setListBox1] = useState([]);
-  const [listBox2, setListBox2] = useState([]);
-  const [gifSuccess, setGifSuccess] = useState(false);
-  const [gifError, setGifError] = useState(false);
-
-  var startTimeOut;
-
-  const timeOut = () => {
-    startTimeOut = setTimeout(function () {
-      setTimer(timer - 1);
-    }, 1000);
-  };
-
-  useEffect(() => {
-    if (timer < 0) {
-      clearTimeout(startTimeOut);
-      loadBox1();
-      loadBox2();
-      setTimer(hardTimer);
-      setError_Point(error_Point + 1);
-    } else {
-      timeOut();
-    }
-  }, [timer, setTimer]);
-
   const success = () => {
-    setpoint(point + 1);
-    setSuccess_Point(success_Point + 1);
-    setTimer(-1);
-    clearTimeout(startTimeOut);
-    setGifSuccess(true);
-    setTimeout(function () {
-      setGifSuccess(false);
-    }, 1000);
-    // audioSuccess.play();
+    setpoint(point + 10);
+    audioSuccess.play();
   };
 
   const error = () => {
-    setTimer(-1);
-    setError_Point(error_Point + 1);
-    clearTimeout(startTimeOut);
-    setGifError(true);
-    setTimeout(function () {
-      setGifError(false);
-    }, 2000);
-    // audioError.play();
+    setpoint(point - 10);
+    audioError.play();
   };
 
   const testBox1 = (imgClick) => {
-    const foundBox2 = listBox2.find((images) => images === imgClick);
+    const foundBox2 = box2.find((images) => images === imgClick);
     foundBox2 ? success() : error();
   };
-
   const testBox2 = (imgClick) => {
-    const foundBox1 = listBox1.find((images) => images === imgClick);
+    const foundBox1 = box1.find((images) => images === imgClick);
     foundBox1 ? success() : error();
   };
 
@@ -146,16 +100,14 @@ function Boxes(props) {
   var box1 = [same];
   for (var i = 0; i < imageNames.length; i++) {
     var idx = imageNames[Math.floor(Math.random() * imageNames.length)];
+
     let test = box1.find((e) => e === idx);
     if (!test && box1.length < numfor) {
       box1.push(idx);
-      box1.sort(() => Math.random() - 0.5);
     }
   }
 
-  const loadBox1 = () => {
-    setListBox1(box1);
-  };
+  const listBox1 = box1.sort(() => Math.random() - 0.5);
 
   var box2 = [same];
   for (var i = 0; i < imageNames.length; i++) {
@@ -164,27 +116,13 @@ function Boxes(props) {
     let test1 = box1.find((e) => e === idx);
     if (!test && !test1 && box2.length < numfor) {
       box2.push(idx);
-      box2.sort(() => Math.random() - 0.5);
     }
   }
-  const loadBox2 = () => {
-    setListBox2(box2);
-  };
+  const listBox2 = box2.sort(() => Math.random() - 0.5);
 
   return (
     <div className="boxes">
       DOUBLE
-      {gifSuccess && (
-        <div className="gif-answer">
-          {" "}
-          <img src={GifSuccess} alt="logo" style={{ width: "50%" }} />
-        </div>
-      )}
-      {gifError && (
-        <div className="gif-answer">
-          <img src={GifError} alt="logo" style={{ width: "40%" }} />{" "}
-        </div>
-      )}
       <div className={small_large} id="box1">
         {" "}
         {listBox1.map((imgClick, index) => (
