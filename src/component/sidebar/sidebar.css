@@ -6,7 +6,7 @@
   right: 0;
   width: 20%;
   height: 100%;
-  padding-top: 4vw;
+  padding-top: 3vw;
   background-image: url("old_map.png");
   -webkit-box-shadow: 0 0 50px #fff;
   box-shadow: 0 0 50px rgb(255, 255, 255);
@@ -54,12 +54,13 @@
   padding: 5px;
   display: inline-block;
   margin: 1vw 0.6vw;
+  cursor: pointer;
 }
 .switch {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 10vw;
+  height: 8vw;
 }
 .img-switch {
   width: 40%;
@@ -73,6 +74,7 @@
   opacity: 1;
   -webkit-box-shadow: 0 0 50px #fff;
   box-shadow: 0 0 10px rgb(153, 23, 23);
+  cursor: pointer;
 }
 .icon-point {
   width: 5vw;
@@ -94,7 +96,6 @@
   position: absolute;
   top: 0.5vw;
   /* left: 0; */
-  cursor: pointer;
 }
 #top-num-error {
   top: -0.3vw;

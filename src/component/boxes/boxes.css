@@ -54,7 +54,10 @@
   -webkit-box-shadow: 0 0 50px #fff;
   box-shadow: 0 0 30px rgb(255, 255, 255);
 }
-
+img[disabled] {
+  pointer-events: none;
+  opacity: 0.7;
+}
 .boxes #box1 {
   left: 42%;
 }
@@ -84,4 +87,16 @@
   top: 18%;
   z-index: 1;
   /* box-shadow: 0 0 7500px rgb(185, 31, 31); */
+}
+.div-btn-start {
+  background-color: aqua;
+  width: 20%;
+  height: 10vw;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }

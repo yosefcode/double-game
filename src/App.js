@@ -4,13 +4,13 @@ import SideBar from "./component/sidebar/sidebar";
 import Boxes from "./component/boxes/boxes";
 
 function App() {
-  const [point, setpoint] = useState(0);
+  const [point, setpoint] = useState();
   const [numfor, setNumfor] = useState(9);
   const [small_large, setSmall_large] = useState("boxsmall");
   const [audioSuccess] = useState(new Audio("sound/success.mp3"));
   const [audioError] = useState(new Audio("sound/error.mp3"));
-  const [hardTimer, setHardTimer] = useState(30);
-  const [timer, setTimer] = useState(hardTimer);
+  const [hardTimer, setHardTimer] = useState(10);
+  const [timer, setTimer] = useState(10);
   const [success_Point, setSuccess_Point] = useState(0);
   const [error_Point, setError_Point] = useState(0);
 

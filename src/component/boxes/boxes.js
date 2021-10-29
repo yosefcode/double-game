@@ -86,47 +86,65 @@ function Boxes(props) {
   const [listBox1, setListBox1] = useState([]);
   const [listBox2, setListBox2] = useState([]);
   const [gifSuccess, setGifSuccess] = useState(false);
+  const [intervalval, setIntervalval] = useState();
   const [gifError, setGifError] = useState(false);
+  const [disable, setDisable] = useState(false);
+  const [valBtnPause, setValBtnPause] = useState("עצור משחק");
 
-  var startTimeOut;
-
-  const timeOut = () => {
-    startTimeOut = setTimeout(function () {
-      setTimer(timer - 1);
+  const startInterval = () => {
+    var interval = setInterval(() => {
+      setTimer((timer) => timer - 1);
     }, 1000);
+    setIntervalval(interval);
   };
 
+  const clear_Interval = () => {
+    clearInterval(intervalval);
+  };
+  console.log(timer);
+
   useEffect(() => {
-    if (timer < 0) {
-      clearTimeout(startTimeOut);
-      loadBox1();
-      loadBox2();
-      setTimer(hardTimer);
-      setError_Point(error_Point + 1);
-    } else {
-      timeOut();
+    if (timer === -1) {
+      error();
     }
   }, [timer, setTimer]);
 
+  const start = () => {
+    setDisable(false);
+    clear_Interval();
+    setSuccess_Point(0);
+    setError_Point(0);
+    loadBox1();
+    loadBox2();
+    setTimer(hardTimer);
+    startInterval();
+    // setIntervalval();
+  };
+
   const success = () => {
-    setpoint(point + 1);
     setSuccess_Point(success_Point + 1);
-    setTimer(-1);
-    clearTimeout(startTimeOut);
+    loadBox1();
+    loadBox2();
+    setTimer(hardTimer);
+    clear_Interval();
     setGifSuccess(true);
     setTimeout(function () {
       setGifSuccess(false);
+      startInterval();
     }, 1000);
     // audioSuccess.play();
   };
 
   const error = () => {
-    setTimer(-1);
+    setTimer(hardTimer);
     setError_Point(error_Point + 1);
-    clearTimeout(startTimeOut);
+    loadBox1();
+    loadBox2();
+    clear_Interval();
     setGifError(true);
     setTimeout(function () {
       setGifError(false);
+      startInterval();
     }, 2000);
     // audioError.play();
   };
@@ -196,6 +214,7 @@ function Boxes(props) {
             onClick={() => {
               testBox1(imgClick);
             }}
+            disabled={disable}
           />
         ))}{" "}
       </div>
@@ -210,9 +229,37 @@ function Boxes(props) {
             onClick={() => {
               testBox2(imgClick);
             }}
+            disabled={disable}
           />
         ))}
       </div>{" "}
+      <div className="div-btn-start">
+        <button
+          onClick={() => {
+            setIntervalval();
+            setValBtnPause("עצור משחק");
+            start();
+          }}
+        >
+          משחק חדש
+        </button>
+        <button
+          onClick={() => {
+            if (disable === false) {
+              clear_Interval();
+              setDisable(true);
+              setValBtnPause("המשך משחק");
+            } else {
+              setValBtnPause("עצור משחק");
+              setDisable(false);
+              startInterval();
+            }
+          }}
+        >
+          {valBtnPause}
+        </button>
+        <button onClick={() => {}}>סיים משחק</button>
+      </div>
     </div>
   );
 }

@@ -30,13 +30,15 @@ function SideBar(props) {
   const card16 = () => {
     setNumfor(16);
     setSmall_large("boxlarge");
-    setpoint(0);
+    setSuccess_Point(0);
+    setError_Point(0);
   };
 
   const card9 = () => {
     setNumfor(9);
     setSmall_large("boxsmall");
-    setpoint(0);
+    setSuccess_Point(0);
+    setError_Point(0);
   };
 
   return (
@@ -66,16 +68,36 @@ function SideBar(props) {
       </div>
       <br />
       <br />
-      <br />
       <div className="timer">{timer}</div>
 
-      <button className="change-timer" onClick={() => setHardTimer(10)}>
+      <button
+        className="change-timer"
+        id={hardTimer !== 10 ? "low" : ""}
+        onClick={() => {
+          setHardTimer(10);
+          setTimer(10);
+        }}
+      >
         10
       </button>
-      <button className="change-timer" onClick={() => setHardTimer(20)}>
+      <button
+        className="change-timer"
+        id={hardTimer !== 20 ? "low" : ""}
+        onClick={() => {
+          setHardTimer(20);
+          setTimer(20);
+        }}
+      >
         20
       </button>
-      <button className="change-timer" onClick={() => setHardTimer(30)}>
+      <button
+        className="change-timer"
+        id={hardTimer !== 30 ? "low" : ""}
+        onClick={() => {
+          setHardTimer(30);
+          setTimer(30);
+        }}
+      >
         30
       </button>
       <br />
@@ -84,14 +106,14 @@ function SideBar(props) {
       <div className="switch">
         <img
           src={img9}
-          aly=""
+          alt=""
           onClick={card9}
           className="img-switch"
           id={numfor === 16 ? "low" : ""}
         />
         <img
           src={img16}
-          aly=""
+          alt=""
           onClick={card16}
           className="img-switch"
           id={numfor === 9 ? "low" : ""}
