@@ -2,14 +2,14 @@ import "./boxes.css";
 import React, { useState, useEffect } from "react";
 import GifSuccess from "./Line Stickers & Themes.gif";
 import GifError from "./thumbs-down-emoji-unscreen.gif";
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 function Boxes(props) {
   const {
     numfor,
     audioSuccess,
     audioError,
     small_large,
-    point,
-    setpoint,
     timer,
     setTimer,
     hardTimer,
@@ -88,7 +88,9 @@ function Boxes(props) {
   const [gifSuccess, setGifSuccess] = useState(false);
   const [intervalval, setIntervalval] = useState();
   const [gifError, setGifError] = useState(false);
+  const [startError, setStartError] = useState(false);
   const [disable, setDisable] = useState(false);
+  const [disablePause, setDisablePause] = useState(true);
   const [valBtnPause, setValBtnPause] = useState("עצור משחק");
 
   const startInterval = () => {
@@ -104,21 +106,46 @@ function Boxes(props) {
   console.log(timer);
 
   useEffect(() => {
+    if (numfor > 5) {
+      loadBox1();
+      loadBox2();
+    }
+  }, [numfor]);
+
+  useEffect(() => {
     if (timer === -1) {
       error();
     }
   }, [timer, setTimer]);
 
   const start = () => {
-    setDisable(false);
+    if (numfor > 5 && timer > 0) {
+      setDisable(false);
+      clear_Interval();
+      setSuccess_Point(0);
+      setError_Point(0);
+      loadBox1();
+      loadBox2();
+      setTimer(hardTimer);
+      startInterval();
+      setDisablePause(false);
+    } else {
+      setStartError(true);
+      setTimeout(function () {
+        setStartError(false);
+      }, 3000);
+    }
+  };
+  const end = () => {
+    setDisablePause(true);
+
+    setDisable(true);
     clear_Interval();
     setSuccess_Point(0);
     setError_Point(0);
     loadBox1();
     loadBox2();
     setTimer(hardTimer);
-    startInterval();
-    // setIntervalval();
   };
 
   const success = () => {
@@ -131,7 +158,7 @@ function Boxes(props) {
     setTimeout(function () {
       setGifSuccess(false);
       startInterval();
-    }, 1000);
+    }, 2000);
     // audioSuccess.play();
   };
 
@@ -191,11 +218,11 @@ function Boxes(props) {
 
   return (
     <div className="boxes">
-      DOUBLE
+      <div className="header">DOUBLE</div>
       {gifSuccess && (
         <div className="gif-answer">
           {" "}
-          <img src={GifSuccess} alt="logo" style={{ width: "50%" }} />
+          <img src={GifSuccess} alt="logo" style={{ width: "45%" }} />
         </div>
       )}
       {gifError && (
@@ -203,38 +230,80 @@ function Boxes(props) {
           <img src={GifError} alt="logo" style={{ width: "40%" }} />{" "}
         </div>
       )}
-      <div className={small_large} id="box1">
-        {" "}
-        {listBox1.map((imgClick, index) => (
-          <img
-            className="imgbox"
-            key={index}
-            src={`img/${imgClick}`}
-            alt=""
-            onClick={() => {
-              testBox1(imgClick);
-            }}
-            disabled={disable}
-          />
-        ))}{" "}
+      {startError && (
+        <div className="gif-answer">
+          <div className="err-start">
+            יש לבחור מס' שניות וכמות תמונות לכל סיבוב
+            <br />
+            <br />
+            <DoubleArrowIcon
+              style={{
+                fontSize: "5vw",
+                color: "red",
+              }}
+            />
+            <DoubleArrowIcon
+              style={{
+                fontSize: "5vw",
+                color: "red",
+              }}
+            />
+            <DoubleArrowIcon
+              style={{
+                fontSize: "5vw",
+                color: "red",
+              }}
+            />
+            <DoubleArrowIcon
+              style={{
+                fontSize: "5vw",
+                color: "red",
+              }}
+            />
+            <DoubleArrowIcon
+              style={{
+                fontSize: "5vw",
+                color: "red",
+              }}
+            />
+          </div>{" "}
+        </div>
+      )}
+      <div className="all-boxes">
+        <div className={small_large} id="box1">
+          {" "}
+          {listBox1.map((imgClick, index) => (
+            <img
+              className="imgbox"
+              key={index}
+              src={`img/${imgClick}`}
+              alt=""
+              onClick={() => {
+                testBox1(imgClick);
+              }}
+              disabled={disable}
+            />
+          ))}{" "}
+        </div>
+        <div className={small_large} id="box2">
+          {" "}
+          {listBox2.map((imgClick, index) => (
+            <img
+              className="imgbox"
+              key={index}
+              src={`img/${imgClick}`}
+              alt=""
+              onClick={() => {
+                testBox2(imgClick);
+              }}
+              disabled={disable}
+            />
+          ))}
+        </div>
       </div>
-      <div className={small_large} id="box2">
-        {" "}
-        {listBox2.map((imgClick, index) => (
-          <img
-            className="imgbox"
-            key={index}
-            src={`img/${imgClick}`}
-            alt=""
-            onClick={() => {
-              testBox2(imgClick);
-            }}
-            disabled={disable}
-          />
-        ))}
-      </div>{" "}
       <div className="div-btn-start">
         <button
+          className="btn-start"
           onClick={() => {
             setIntervalval();
             setValBtnPause("עצור משחק");
@@ -244,6 +313,8 @@ function Boxes(props) {
           משחק חדש
         </button>
         <button
+          disabled={disablePause}
+          className="btn-start"
           onClick={() => {
             if (disable === false) {
               clear_Interval();
@@ -258,7 +329,9 @@ function Boxes(props) {
         >
           {valBtnPause}
         </button>
-        <button onClick={() => {}}>סיים משחק</button>
+        <button disabled={disablePause} className="btn-start" onClick={end}>
+          סיים משחק
+        </button>
       </div>
     </div>
   );

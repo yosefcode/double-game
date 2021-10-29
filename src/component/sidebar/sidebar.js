@@ -66,43 +66,40 @@ function SideBar(props) {
           </div>
         </div>
       </div>
-      <br />
-      <br />
-      <div className="timer">{timer}</div>
+      <div className="all-timer">
+        <div className="timer">{timer}</div>
 
-      <button
-        className="change-timer"
-        id={hardTimer !== 10 ? "low" : ""}
-        onClick={() => {
-          setHardTimer(10);
-          setTimer(10);
-        }}
-      >
-        10
-      </button>
-      <button
-        className="change-timer"
-        id={hardTimer !== 20 ? "low" : ""}
-        onClick={() => {
-          setHardTimer(20);
-          setTimer(20);
-        }}
-      >
-        20
-      </button>
-      <button
-        className="change-timer"
-        id={hardTimer !== 30 ? "low" : ""}
-        onClick={() => {
-          setHardTimer(30);
-          setTimer(30);
-        }}
-      >
-        30
-      </button>
-      <br />
-      <br />
-
+        <button
+          className="change-timer"
+          id={hardTimer !== 10 ? "low" : ""}
+          onClick={() => {
+            setHardTimer(10);
+            setTimer(10);
+          }}
+        >
+          10
+        </button>
+        <button
+          className="change-timer"
+          id={hardTimer !== 20 ? "low" : ""}
+          onClick={() => {
+            setHardTimer(20);
+            setTimer(20);
+          }}
+        >
+          20
+        </button>
+        <button
+          className="change-timer"
+          id={hardTimer !== 30 ? "low" : ""}
+          onClick={() => {
+            setHardTimer(30);
+            setTimer(30);
+          }}
+        >
+          30
+        </button>
+      </div>
       <div className="switch">
         <img
           src={img9}
@@ -120,8 +117,6 @@ function SideBar(props) {
         />
       </div>
       <div>
-        <br />
-        <br />
         {/* {audio === true ? (
           <NotificationsIcon
             fontSize="large"
