@@ -118,15 +118,17 @@ function SideBar(props) {
       </div>
       <div>
         {audio === true ? (
+          // audioError.volume = 0;
+          // audioSuccess.volume = 0;
           <NotificationsIcon
             style={{
               fontSize: "5vw",
             }}
             className="iconbip"
             onClick={() => {
+              setAudio(false);
               audioError.volume = 0;
               audioSuccess.volume = 0;
-              setAudio(false);
             }}
           />
         ) : (

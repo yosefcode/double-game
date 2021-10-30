@@ -7,12 +7,12 @@ function App() {
   const [point, setpoint] = useState();
   const [numfor, setNumfor] = useState();
   const [small_large, setSmall_large] = useState("boxsmall");
+  const [audioSuccess] = useState(new Audio("sound/success.mp3"));
+  const [audioError] = useState(new Audio("sound/error.mp3"));
   const [hardTimer, setHardTimer] = useState(0);
   const [timer, setTimer] = useState(0);
   const [success_Point, setSuccess_Point] = useState(0);
   const [error_Point, setError_Point] = useState(0);
-  const audioSuccess = new Audio("sound/success.mp3");
-  const audioError = new Audio("sound/error.mp3");
 
   return (
     <div className="App">
