@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./sidebar.css";
-// import NotificationsIcon from "@material-ui/icons/Notifications";
-// import NotificationsOffIcon from "@material-ui/icons/NotificationsOff";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import NotificationsOffIcon from "@mui/icons-material/NotificationsOff";
 import img9 from "./img-easy.png";
 import img16 from "./16img.png";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
@@ -117,9 +117,11 @@ function SideBar(props) {
         />
       </div>
       <div>
-        {/* {audio === true ? (
+        {audio === true ? (
           <NotificationsIcon
-            fontSize="large"
+            style={{
+              fontSize: "5vw",
+            }}
             className="iconbip"
             onClick={() => {
               audioError.volume = 0;
@@ -129,7 +131,9 @@ function SideBar(props) {
           />
         ) : (
           <NotificationsOffIcon
-            fontSize="large"
+            style={{
+              fontSize: "5vw",
+            }}
             className="iconbip"
             onClick={() => {
               audioError.volume = 1;
@@ -137,7 +141,7 @@ function SideBar(props) {
               setAudio(true);
             }}
           />
-        )} */}
+        )}
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import GifSuccess from "./Line Stickers & Themes.gif";
 import GifError from "./thumbs-down-emoji-unscreen.gif";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 function Boxes(props) {
   const {
     numfor,
@@ -138,7 +137,6 @@ function Boxes(props) {
   };
   const end = () => {
     setDisablePause(true);
-
     setDisable(true);
     clear_Interval();
     setSuccess_Point(0);
@@ -159,7 +157,7 @@ function Boxes(props) {
       setGifSuccess(false);
       startInterval();
     }, 2000);
-    // audioSuccess.play();
+    audioSuccess.play();
   };
 
   const error = () => {
@@ -173,7 +171,7 @@ function Boxes(props) {
       setGifError(false);
       startInterval();
     }, 2000);
-    // audioError.play();
+    audioError.play();
   };
 
   const testBox1 = (imgClick) => {
@@ -189,11 +187,12 @@ function Boxes(props) {
   var same = imageNames[Math.floor(Math.random() * imageNames.length)];
 
   var box1 = [same];
-  for (var i = 0; i < imageNames.length; i++) {
-    var idx = imageNames[Math.floor(Math.random() * imageNames.length)];
-    let test = box1.find((e) => e === idx);
+  for (var a = 0; a < imageNames.length; a++) {
+    var randomBox1 = imageNames[Math.floor(Math.random() * imageNames.length)];
+    let test = box1.find((e) => e === randomBox1);
+
     if (!test && box1.length < numfor) {
-      box1.push(idx);
+      box1.push(randomBox1);
       box1.sort(() => Math.random() - 0.5);
     }
   }
@@ -203,12 +202,12 @@ function Boxes(props) {
   };
 
   var box2 = [same];
-  for (var i = 0; i < imageNames.length; i++) {
-    var idx = imageNames[Math.floor(Math.random() * imageNames.length)];
-    let test = box2.find((e) => e === idx);
-    let test1 = box1.find((e) => e === idx);
+  for (var b = 0; b < imageNames.length; b++) {
+    var randomBox2 = imageNames[Math.floor(Math.random() * imageNames.length)];
+    var test = box2.find((e) => e === randomBox2);
+    let test1 = box1.find((e) => e === randomBox2);
     if (!test && !test1 && box2.length < numfor) {
-      box2.push(idx);
+      box2.push(randomBox2);
       box2.sort(() => Math.random() - 0.5);
     }
   }
