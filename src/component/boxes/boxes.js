@@ -91,6 +91,7 @@ function Boxes(props) {
   const [disable, setDisable] = useState(false);
   const [disablePause, setDisablePause] = useState(true);
   const [valBtnPause, setValBtnPause] = useState("עצור משחק");
+  const [correctAnswer, setCorrectAnswer] = useState();
 
   const startInterval = () => {
     var interval = setInterval(() => {
@@ -102,7 +103,6 @@ function Boxes(props) {
   const clear_Interval = () => {
     clearInterval(intervalval);
   };
-  console.log(timer);
 
   useEffect(() => {
     if (numfor > 5) {
@@ -113,6 +113,12 @@ function Boxes(props) {
 
   useEffect(() => {
     if (timer === -1) {
+      for (var a = 0; a < listBox2.length; a++) {
+        let testAnswer = listBox1.find((s) => s === listBox2[a]);
+        if (testAnswer) {
+          setCorrectAnswer(testAnswer);
+        }
+      }
       error();
     }
   }, [timer, setTimer]);
@@ -148,39 +154,52 @@ function Boxes(props) {
 
   const success = () => {
     setSuccess_Point(success_Point + 1);
-    loadBox1();
-    loadBox2();
     setTimer(hardTimer);
     clear_Interval();
     setGifSuccess(true);
     setTimeout(function () {
+      setCorrectAnswer();
       setGifSuccess(false);
+      loadBox1();
+      loadBox2();
       startInterval();
-    }, 2000);
+    }, 3000);
     audioSuccess.play();
   };
 
   const error = () => {
     setTimer(hardTimer);
     setError_Point(error_Point + 1);
-    loadBox1();
-    loadBox2();
     clear_Interval();
     setGifError(true);
     setTimeout(function () {
+      setCorrectAnswer();
       setGifError(false);
+      loadBox1();
+      loadBox2();
       startInterval();
-    }, 2000);
+    }, 3000);
     audioError.play();
   };
-
   const testBox1 = (imgClick) => {
     const foundBox2 = listBox2.find((images) => images === imgClick);
+    for (var a = 0; a < listBox2.length; a++) {
+      let testAnswer = listBox1.find((s) => s === listBox2[a]);
+      if (testAnswer) {
+        setCorrectAnswer(testAnswer);
+      }
+    }
     foundBox2 ? success() : error();
   };
 
   const testBox2 = (imgClick) => {
     const foundBox1 = listBox1.find((images) => images === imgClick);
+    for (var a = 0; a < listBox2.length; a++) {
+      let testAnswer = listBox1.find((s) => s === listBox2[a]);
+      if (testAnswer) {
+        setCorrectAnswer(testAnswer);
+      }
+    }
     foundBox1 ? success() : error();
   };
 
@@ -221,12 +240,12 @@ function Boxes(props) {
       {gifSuccess && (
         <div className="gif-answer">
           {" "}
-          <img src={GifSuccess} alt="logo" style={{ width: "45%" }} />
+          <img src={GifSuccess} alt="logo" style={{ width: "15%" }} />
         </div>
       )}
       {gifError && (
         <div className="gif-answer">
-          <img src={GifError} alt="logo" style={{ width: "40%" }} />{" "}
+          <img src={GifError} alt="logo" style={{ width: "15%" }} />{" "}
         </div>
       )}
       {startError && (
@@ -271,33 +290,59 @@ function Boxes(props) {
       <div className="all-boxes">
         <div className={small_large} id="box1">
           {" "}
-          {listBox1.map((imgClick, index) => (
-            <img
-              className="imgbox"
-              key={index}
-              src={`img/${imgClick}`}
-              alt=""
-              onClick={() => {
-                testBox1(imgClick);
-              }}
-              disabled={disable}
-            />
-          ))}{" "}
+          {listBox1.map((imgClick, index) =>
+            imgClick === correctAnswer ? (
+              <img
+                className="imgboxCorrectAnswer"
+                key={index}
+                src={`img/${imgClick}`}
+                alt=""
+                onClick={() => {
+                  testBox1(imgClick);
+                }}
+                disabled={disable}
+              />
+            ) : (
+              <img
+                className="imgbox"
+                key={index}
+                src={`img/${imgClick}`}
+                alt=""
+                onClick={() => {
+                  testBox1(imgClick);
+                }}
+                disabled={disable}
+              />
+            )
+          )}{" "}
         </div>
         <div className={small_large} id="box2">
           {" "}
-          {listBox2.map((imgClick, index) => (
-            <img
-              className="imgbox"
-              key={index}
-              src={`img/${imgClick}`}
-              alt=""
-              onClick={() => {
-                testBox2(imgClick);
-              }}
-              disabled={disable}
-            />
-          ))}
+          {listBox2.map((imgClick, index) =>
+            imgClick === correctAnswer ? (
+              <img
+                className="imgboxCorrectAnswer"
+                key={index}
+                src={`img/${imgClick}`}
+                alt=""
+                onClick={() => {
+                  testBox2(imgClick);
+                }}
+                disabled={disable}
+              />
+            ) : (
+              <img
+                className="imgbox"
+                key={index}
+                src={`img/${imgClick}`}
+                alt=""
+                onClick={() => {
+                  testBox2(imgClick);
+                }}
+                disabled={disable}
+              />
+            )
+          )}
         </div>
       </div>
       <div className="div-btn-start">
