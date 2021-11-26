@@ -291,7 +291,18 @@ function Boxes(props) {
         <div className={small_large} id="box1">
           {" "}
           {listBox1.map((imgClick, index) =>
-            imgClick === correctAnswer ? (
+            !correctAnswer ? (
+              <img
+                className="imgbox"
+                key={index}
+                src={`img/${imgClick}`}
+                alt=""
+                onClick={() => {
+                  testBox1(imgClick);
+                }}
+                disabled={disable}
+              />
+            ) : imgClick === correctAnswer ? (
               <img
                 className="imgboxCorrectAnswer"
                 key={index}
@@ -304,6 +315,7 @@ function Boxes(props) {
               />
             ) : (
               <img
+                style={{ opacity: 0.3 }}
                 className="imgbox"
                 key={index}
                 src={`img/${imgClick}`}
@@ -319,7 +331,18 @@ function Boxes(props) {
         <div className={small_large} id="box2">
           {" "}
           {listBox2.map((imgClick, index) =>
-            imgClick === correctAnswer ? (
+            !correctAnswer ? (
+              <img
+                className="imgbox"
+                key={index}
+                src={`img/${imgClick}`}
+                alt=""
+                onClick={() => {
+                  testBox1(imgClick);
+                }}
+                disabled={disable}
+              />
+            ) : imgClick === correctAnswer ? (
               <img
                 className="imgboxCorrectAnswer"
                 key={index}
@@ -332,6 +355,7 @@ function Boxes(props) {
               />
             ) : (
               <img
+                style={{ opacity: 0.3 }}
                 className="imgbox"
                 key={index}
                 src={`img/${imgClick}`}
