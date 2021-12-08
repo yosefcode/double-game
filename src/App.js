@@ -15,7 +15,7 @@ function App() {
   const [error_Point, setError_Point] = useState(0);
 
   return (
-    <div className="App">
+    <div className="App" dir="rtl">
       <SideBar
         setSmall_large={setSmall_large}
         setNumfor={setNumfor}
